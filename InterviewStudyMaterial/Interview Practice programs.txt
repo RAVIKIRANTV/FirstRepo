@@ -1,0 +1,976 @@
+  //string str = null;
+            //try
+            //{
+            //    if (str.Length > 0)
+            //    {
+            //        Console.WriteLine(str);
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    //    throw ex;
+            //    Console.WriteLine("Wecome");
+            //}
+
+            //int aa = 35;
+            //int bb = 66;
+            //Student student = new Student();
+            //Console.WriteLine("First number is {0},Second number is {1}",aa,bb);
+            Student std = new Student("Ravi");
+            Student std1 = new Student("Hemanth");
+            Student.M1(std);
+            int fnuumber = 0, snumber = 1, result = 0;
+            Console.WriteLine(fnuumber);
+            Console.WriteLine(snumber);
+            for (int i = 0; i < 10; i++)
+            {
+                result = fnuumber + snumber;        
+                fnuumber = snumber;
+                snumber = result;
+                Console.WriteLine(result);
+            }
+            Emp e = new Emp();
+            int sum= e.M9();
+            Console.WriteLine(sum);
+            Console.WriteLine("enter a number");
+            int number=Convert.ToInt32( Console.ReadLine());     
+            Console.WriteLine(""+number);
+            L l = new L();
+            M m = new M(l.M1);
+            int gg = m(33333,33333);
+            Console.WriteLine(gg);
+            j jj = new j();
+            jj.M2();
+   A a = new A();
+            int aa=0;int b=0;
+            a.M1(ref aa,ref b);
+            Console.WriteLine(aa);
+            Console.WriteLine(b);
+----------------------------------------------------------------------------------
+    public class A
+    {
+        public  const int res=25;
+        public static readonly int result;
+        public void M1(int result, int res)
+        {
+            result = 50;
+            res = 51;
+        }
+        public void M2()
+        {
+            const int a = 30;
+      
+            //readonly int b = 35;
+        }
+       
+    }
+    interface I1
+    {
+        void M5();
+    }
+    interface I2
+    {
+        void M6();
+    }
+    public class B:I1,I2
+    {      
+        public void M5()
+        {
+            Console.WriteLine();
+        }
+        public void M6()
+        {
+            Console.WriteLine();
+        }
+    }
+    public abstract class C
+    {
+        public abstract void Method();
+       
+    }
+    public  class E:C
+    {
+        public override void Method()
+        {
+            Console.WriteLine(" ");
+        }
+    }
+    public  class Student
+    {
+        string name;
+        public Student(string name)
+        {
+            this.name = name;
+            Console.WriteLine(name);
+        }
+      
+        public static void M1(Student student)
+        {
+          
+            Console.WriteLine(student.name);
+        }
+    }
+    public class Emp
+    {
+       int a = 20;
+        int b = 30;
+
+        public virtual int M9()
+        {
+            return a + b;
+        }
+    }
+    public class AA
+    {
+        public virtual int M1(int x1)
+        {
+            return x1 + 2;
+        }
+    }
+    public class BB:AA
+    {
+        public override int M1(int y1)
+        {
+            return y1 + 4;
+        }
+    }
+
+    public delegate int M(int j, int k);
+    public class L
+    {
+        public int M1(int d,int o)
+        {
+            return d + o;
+        }
+    }
+    public struct j
+    {
+       public void M2()
+       {
+            Console.WriteLine("Welcome to M2");
+       }
+    }
+
+  public class A
+    {
+        public void M1(ref int x,ref int y)
+        {
+            x = 30;y = 60;
+        }
+    }
+---------------------------Singlecast Delegate-----------------------------------
+ class Program
+    {
+        static void Main(string[] args)
+        {
+            A a = new A();
+            A.Dell dell = new A.Dell(a.M1);
+            int result=dell(25,36);
+            Console.WriteLine(result);
+            Console.ReadLine();
+        }
+    }
+    public class A
+    {
+        public delegate int Dell(int x, int y);
+        public int M1(int x,int y)
+        {
+            return x + y;
+        }
+    }
+---------------------------------Multicast Delegate------------------------------
+class Program
+    {
+        static void Main(string[] args)
+        {
+            B b = new B();
+            C c = new C();
+            A.Dell dell1 = new A.Dell(b.M2);
+            A.Dell dell2 = new A.Dell(c.M3);
+            A.Dell dell3 = new A.Dell(c.M4);
+            A.Dell dell4 = dell1 + dell2 + dell3;
+            A a = new A();
+            a.M1(dell4);       
+            Console.ReadLine();
+        }
+    }
+    public class A
+    {
+        public delegate void Dell(int x, int y);
+        public void M1(Dell del)
+        {
+            del(10, 20);
+        }
+    }
+    public class B
+    {
+        public void M2(int x,int y)
+        {
+            Console.WriteLine(x + y);
+        }
+    }
+    public class C
+    {
+        public void M3(int x,int y)
+        {
+            Console.WriteLine(x - y);
+        }
+        public void M4(int x,int y)
+        {
+            Console.WriteLine(x * y);
+        }
+    }
+----------------------------------Exetesion Method example---------------------------
+ class Program
+    {
+        static void Main(string[] args)
+        {
+            string s = "palle technologies and reserch center";
+            int result = s.TotalWords();
+            Console.WriteLine(result);
+            Console.ReadLine();
+        }
+    }
+    public static class A
+    {
+       public static int TotalWords(this string s)
+        {
+            char[] c = new char[] { ' ' };
+            string[] totalWords = s.Split(c);
+            return totalWords.Length;
+        }
+    }
+-----------------------------------Events-----------------------------------------------
+public delegate void Notify();
+public class A
+{
+	public event Notify ProcessCompleted;
+}
+--------------------------------------------------------------------------------
+
+
+---------------------------------Stored Procedure-----------------------------
+
+create procedure Getstudent_details
+@studentid int
+as
+begin
+select * from student where studentid=@studentid 
+end
+
+-------------------------------User defined function--------------------------
+create function Student
+(parameterList)
+return datatype [size]
+as
+begin
+statement 1
+return data
+end
+-----------------------------------udf example--------------------------------
+
+create function GetFUllEmployeeName
+(
+@eid int
+)
+returns varchar(80)
+as
+begin
+declare @fullname varchar(80)
+select @fullname=fname+lname  from employee where eid=@eid
+return @fullname
+end
+
+select dbo.GetFUllEmployeeName (1) as 'fullname'
+
+----------------------------------View example----------------------------------
+
+-------------Updatable View---------------------
+
+create view studentdetails
+as
+select * from StudentInformation
+
+--------------Non updatable View-----------------
+
+create view Studentdetails
+as
+select distinct * from studentdetails
+
+select dept from employee group by dept
+
+---------------------------------Clustered Index--------------------------------
+create clustered index ci_studentid
+on student(studentid)
+
+------------------------------Transaction Example-------------------------------
+
+table contains acid and ac name and ballance
+
+create procedure transferAmount
+(
+@sacid int,@dacid int,@amount float 
+)
+as
+Begin
+	Begin transaction
+	update  accounts set ballance=ballance-@amount where acid=@sacid
+	if(@@ERROR=0)
+	begin
+		update accounts set ballance=ballance+@amount where acid=@dacid
+		if(@@ERROR=0)
+		Begin
+			commit transaction
+		End
+		else
+		Begin
+			rollback transaction
+		End
+	End
+End
+exec transferAmount 1,2,1000000
+
+---------------------------------------trigger----------------------------------
+
+create trigger tri_empsalanddept
+on employee
+after insert
+as
+begin
+	declare @dept varchar(40)
+	declare @salary int
+	select @dept=dept,@salary=salary from inserted	
+	if(dept = '.net' and salary >= 100000)
+	bedin
+		rollback transaction
+	end
+end
+
+------------------------Groupby and Having clause-------------------------------
+
+select dept,SUM(salary) as 'total salary' from employee group by dept having sum(salary)>=40000
+
+--------------------------------------CAST AND CONVERT--------------------------
+
+SELECT CAST(25.65 AS int);
+
+SELECT CONVERT(int, 25.65);
+
+----------------------------------Subquery--------------------------------------
+
+select e1.salary from employee e1 where 1=(select COUNT(*) from employee e2 where e2.salary>e1.salary)
+
+select top 1 salary from employee order by salary desc
+
+------------------------------self join example---------------------------------
+
+create table EmployeeDetails
+(
+eid int,empname varchar(40),mgrid int
+) 
+insert into EmployeeDetails values(1,'Raju',2)
+insert into EmployeeDetails values(2,'kiran',4)
+insert into EmployeeDetails values(3,'manasvi',0)
+insert into EmployeeDetails values(4,'hari',3)
+insert into EmployeeDetails values(5,'suresh',3)
+select * from EmployeeDetails
+
+select e1.empname as'empname' ,e2.empname as'mgrname' from EmployeeDetails e1 join EmployeeDetails e2 on e2.eid=e1.mgrid
+
+--------------------------------------------------------------------------------
+
+insert into Employee (Eid) values ((select top Eid+1 from employee order by Eid desc))
+
+--------------------------Sort without order by clause--------------------------------
+
+alter  proc OrderOfEmployeeSalaries
+as
+begin
+	Declare @My_var2 TABLE  
+(  	
+	 result int 
+) 
+	declare @max int
+	set @max=(select COUNT(*)salary from newemployee)
+	declare @eid int
+	set @eid=1
+	declare @num int
+	set @num=0
+	while(@eid <= @max)
+	begin
+		declare @result int		
+		if(@num = @num-1)
+		begin
+		print @result
+		end
+		set @result = (select distinct e1.salary from newemployee e1 where @num =(select  count(*) from newemployee e2 where e2.salary > e1.salary ))
+		If(@result is null)
+		begin
+		declare @result1 int
+		set @result1 =(select top 1 result from @My_var2) 
+		 insert into @My_var2 values(@result1)
+		end
+		else 
+		begin
+		insert into @My_var2 values(@result)
+		end	
+		set @num=@num+1
+		set @eid=@eid+1
+	end
+	select * from @My_var2
+end
+
+
+exec OrderOfEmployeeSalaries
+
+
+----------------------------------------Row number function----------------------------------------
+
+select * from (
+select row_number() over(order by eid desc)as rownumber , * from newemployee
+)as rownumber where rownumber>3 and rownumber<6
+
+select * from newemployee order by eid desc
+
+
+
+----------------------------------------MVC Samples----------------------------------------
+mvc refers to model view controller
+mvc is frame work and acrhitecture used fro creating web apllication 
+
+in mvc model used fro storing the data
+view is used for displaying the data
+controller is usually handling user requests
+
+strogly typed view
+StudentModel studentmodel=new StudentModel();
+
+losely typed view
+
+viewbag.student=studentmodel
+
+viewdata["student"]=studentmodel;
+
+return view(studentmodel);
+
+strongly typed view is view which is defined by using @model directive
+in case of strongly typed view direclty model will be sent to view 
+
+view bag is used for sending the data from action method to view.
+it is a data dictionary.
+it will stores the data key and value fromat
+view bag will internally use dynamic data type hence type conversion is not required
+
+modelState.clear used for deleting the model object created by model binder which is associated with the model state	
+
+        [Authorize(Roles ="admin")]
+        [HandleError(ExceptionType = typeof(NullReferenceException),View = "CustomErrorPage")]
+
+--------------------------------------------------------------------------------------------------
+                    What are the different types of result objects available in mvc?
+--------------------------------------------------------------------------------------------------
+
+ViewResult
+ViewResult is a datatype which is responsible for returning the View. Let’s look at its example.
+
+public class HomeController : Controller  
+{  
+    public ViewResult Index()  
+    {  
+        return View();  
+    }  
+}  
+
+PartialViewResult
+It is the type which is used to return the partial view page rather than returning the regular view page. Look at its example.
+
+public class HomeController : Controller  
+{  
+    public PartialViewResult Index()  
+    {  
+        return PartialView("Second View");  
+    }  
+}  
+
+
+ContentResult
+
+"Content" result is a datatype which is responsible for the returning of content. 
+But the point of interest is, you will have proper control over the returned content. 
+I mean to say that you have to add the content in the “Content” helping method of ContentResult type. 
+Here you can pass the contents like HTML content, Javascript content or any other content. 
+Let’s understand it with examples.
+
+Code of Home controller is given below,
+public class HomeController : Controller  
+{  
+    public ContentResult Index()  
+    {  
+        return Content("<h3>Zain Ul Hassan </h3>");  
+    }  
+}  
+
+
+EmptyResult
+ 
+This type is genuinely for returning nothing. But the problem is, this EmptyResult type doesn’t have any helper method. So we can use it by making its object, as shown below,
+public class HomeController : Controller  
+{  
+    public EmptyResult Index()  
+    {  
+        return new EmptyResult();  
+    }  
+}  
+
+FileResult
+FileResult is a type which is used to return the file to the browser. The helper method for this type is File, and has many overloads. So if we use the following overload and specify only the URL of the file and the MIME (Multipurpose Internet Mail Extensions) type then we should see the content of the file in the browser. Let’s take an example.
+
+The overload we use is,
+
+protected internal FilePathResult File(string fileName, string contentType);  
+And the code for action method using FileResult type is as follows,
+
+public class HomeController : Controller  
+{  
+    public FileResult Index()  
+    {  
+        return File("~/Files/text.txt", "text/plain");  
+    }  
+} 
+
+
+
+JsonResult
+ 
+It is the derived type of ActionResult which is used to represent the JSON data. 
+To see how can we JSONify any data, you can see code below:
+public JsonResult Index()  
+{  
+    return Json(new { Name = "Zain Ul Hassan", ID = 1 }, JsonRequestBehavior.AllowGet);  
+} 
+
+JavaScriptResult
+ 
+This derive type is used for returning the javascript code from the controller. When it executes we see the javascript code as we mentioned in the controller’s action method. For details, let’s take an example,
+public JavaScriptResult Index()  
+{  
+    return JavaScript("alert('Zain Ul hassan')");  
+}  
+
+
+
+RedirectionToRouteResult
+ 
+It is responsible for the redirection to the actions within the application. There are many helper methods in it which are actually overloads. We use RedirectToRoute which redirect us to the action within the specified controller. Let’s look at its example.
+public RedirectToRouteResult Index()  
+{  
+    return RedirectToRoute(new { controller = "Student", action = "Name" });  
+}  
+
+
+
+Informational responses (100–199)
+Successful responses (200–299)
+Redirects (300–399)
+Client errors (400–499)
+Server errors (500–599)
+
+-----------------------------------------Asp.net-------------------------------------------
+
+html controls are light weight and asp controls are heavy weight
+during rendering time all asp.net controls will be converted into html controls.
+
+page life cycle methods
+-------------------------
+page preinit 
+page init
+load view state
+page load
+click event method
+page prerender
+save view state
+render
+unload
+-------------------------
+what is cookie
+cookie is the client side management technique usually used to store the user specific data.
+temprory cookie will not be having expiration time it will delete the when the browser will close
+
+permanant cookie it will having expiration time it will deleted when the expiration time will be completed
+
+cookie  will be created in the server will send to the browser browser will send cookie back to the server with each request
+
+action linK(hyper link)
+Reponse.Redirect
+server.transfer
+server.execute
+
+session is created its session id will stored int the cookie.
+the automatically generated cookie will be send back to the browser
+the request sent from the browser to server it will carray the session cookie
+using session id present in the coolie web server will identify the user session
+
+avoid using view state for storing specilly in  the heavy weight controls
+use cacthing technique where ever is required
+use minified css and js files
+use the cdn for the css and java script file
+use less number of web page
+
+authentication used for checking the user is valid or not
+identify whether the user is allowed to acces specific resource or not
+
+
+-------------------------Page Life Cycle Method------------------------
+
+protected void Page_Load(object sender,EventArgs e)
+{
+		
+}
+
+protected void override Loadviewstate()
+{
+	base.LOadViewState(saveviewstate)
+}
+
+protected void override Loadviewstate()
+{
+	base.LOadViewState(saveviewstate)
+}
+
+------------------------State Management Technique----------------------
+
+-------------
+Query String
+-------------
+
+string n1=tbName.txt
+string e1=tbEmail.txt
+
+Response.Redirect("B.aspx?n="+n1+" &e="+e1)
+string s1=Convert.ToString(Request.QueryString["n"]);
+string s2=Convert.ToString(Request.QueryString["e"]);
+Response.Output.Write("Name is= {0},Email is={1}",s1,s2);
+
+-------------
+Cookies
+-------------
+
+HttpCookie c=new HttpCookie("PU");
+c.values["n"]=tbName.txt;
+c.values["c"]=tbCell.txt;
+Response.cookies.Add(c);
+Response.Redirect("B.aspx");
+
+HttpCookie ck=Request.Cookies["PU"];
+string n1=Convert.TOstring(ck.Values["n"]);
+string c1=Convert.ToString(ck.Values["c"]);
+R.O.W("Name is={0},Cell Number is={1}",n1,c1);
+
+--------------------
+Hidden Field Control
+--------------------
+
+<input type="Hidden" id="hdnx">
+hdnx.value=10
+
+string s=hdnx.value;
+int y=Convert.ToInt32(s);
+
+--------------------
+View State
+--------------------
+
+ViewState["x"]="palle University"
+
+string s=(string)ViewState["x"];
+Response.Write(s);
+
+--------------------
+Session
+--------------------
+
+Session["x"]=tbName.txt;
+string name=(string)Session["x"];
+
+--------------------
+Application State
+--------------------
+
+Application["x"]=10;
+int y=(int)Application["x"];
+
+---------------------Redirecting the user from one page other page---------------------
+Actionlink("")
+
+Respose.redirect("B.Aspx");
+
+Rersponse.redirect("B.Aspx",false)
+
+server.transfer(B.aspx)
+
+server.execute(B.aspx)
+
+
+HttpCookie c=new HttpCookie("PU")
+c.Values["b"]=tbName.txt
+c.Values["V"]=tbAge.txt
+Response.Cookies.Add(c)
+
+HttpCookie ck=Request.Cookie("PU");
+string Name=Convert.Tostring(ck.Values["b"])
+int Age=Convert.ToInt32(ck.Values["V"]);
+Console.output.Write("Name is = {0},Age is ={1}",Name,Age)
+
+
+-----------------------------------Autorization-----------------------------------------
+
+<Configuration>
+	<system.web>
+		<authorization>
+			<allow roles="admin">
+			<deny users="*"></deny>
+		</authorization>
+	</system.web>
+</Configuration>
+
+----------------------------------Authentication----------------------------------------
+
+<authentication mode="forms">
+<form name="palle" Defaulturl="~/login.aspx" LoginUrl="~/login.aspx" protection = "All" >
+</authentication>
+
+-------------------------------------Global.asax----------------------------------------
+
+ protected void Application_AuthenticateRequest(Object sender, EventArgs e)
+        {
+            if (HttpContext.Current.User != null)
+            {
+                if (HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    if (HttpContext.Current.User.Identity is FormsIdentity)
+                    {
+                        FormsIdentity id = (FormsIdentity)HttpContext.Current.User.Identity;
+                        FormsAuthenticationTicket ticket = id.Ticket;
+                        string userData = ticket.UserData;
+                        string[] roles = userData.Split(',');
+                        HttpContext.Current.User = new GenericPrincipal(id, roles);
+                    }
+                }
+            }
+        }
+
+----------------------How to Set Session Timeout in ASP.NET------------------------------
+
+<configuration>  
+<system.web>  
+<sessionState mode="InProc" cookieless="true" timeout="3600"/>  
+</sessionState>  
+</system.web>  
+</configuration>
+
+void Session_Start(object sender, EventArgs e)  
+{  
+	Session.Timeout = 60;  
+} 
+
+----------------Multiple data sent from view to action method through ajax---------------
+
+var Student = {  
+    ID: '10001',  
+    Name: 'Shashangka',  
+    Age: 31  
+};  
+$.ajax({  
+    type: "POST",  
+    url: "/Home/JqAJAX",  
+    data: Student,  
+    contentType: 'application/x-www-form-urlencoded',  
+    datatype: "html",  
+    success: function(data) {  
+        alert(data.msg);  
+    },  
+    error: function() {  
+        alert("Error occured!!")  
+    }  
+});
+-------------------------------------Connection Code Syntax-------------------------------
+  public int UpdateDoctorDetails(DoctorModel doctorModel,int doctorid)
+        {
+            using (SqlConnection cn = new SqlConnection(cns))
+            {
+                using (SqlCommand cmd = new SqlCommand("Update_Doctor_Details", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Doctor_Id", doctorid);
+                    cmd.Parameters.AddWithValue("@First_Name", doctorModel.First_Name);
+                    cmd.Parameters.AddWithValue("@Last_Name", doctorModel.Last_Name);
+                    cmd.Parameters.AddWithValue("@Age", doctorModel.Age);
+                    cmd.Parameters.AddWithValue("@Gender", doctorModel.Gender);
+                    cmd.Parameters.AddWithValue("@Email", doctorModel.Email);
+                    cmd.Parameters.AddWithValue("@Password", doctorModel.Password);
+                    cmd.Parameters.AddWithValue("@Experience", doctorModel.Experience);
+                    cmd.Parameters.AddWithValue("@Contact_No", doctorModel.Contact_No);
+                    cmd.Parameters.AddWithValue("@Department_Id", doctorModel.Department);
+                    cmd.Parameters.AddWithValue("@Consultaion_Charge", doctorModel.Consultation_Charge);
+                    cmd.Parameters.AddWithValue("@Timings_From", doctorModel.Timings_From);
+                    cmd.Parameters.AddWithValue("@Timings_To", doctorModel.Timings_To);
+                    cmd.Parameters.AddWithValue("@Address", doctorModel.Address);
+                    cmd.Parameters.AddWithValue("@City", doctorModel.City);
+                    cmd.Parameters.AddWithValue("@Pincode", doctorModel.Pincode);
+                    cmd.Parameters.AddWithValue("@State_Id", doctorModel.State);
+                    try
+                    {
+                        cn.Open();
+                        int count = cmd.ExecuteNonQuery();
+                        if (count == 1)
+                        {
+                            return count;
+                        }
+                    }
+                    catch (SqlException ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+                    finally
+                    {
+                        if (cn.State == System.Data.ConnectionState.Open)
+                        {
+                            cn.Close();
+                        }
+                    }
+                }
+            }
+            return 0;
+        }
+
+        public List<DoctorModel> GetDoctorDetails()
+        {
+            using (SqlConnection cn = new SqlConnection(cns))
+            {
+                using (SqlCommand cmd = new SqlCommand("GetDoctorDetails", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    try
+                    {
+                        cn.Open();
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        List<DoctorModel> doctorDetailsList = new List<DoctorModel>();
+                        while (dr.Read())
+                        {
+                            DoctorModel doctorModel = new DoctorModel();
+                            doctorModel.Doctor_Id = dr["Doctor_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["Doctor_ID"]);
+                            doctorModel.First_Name = dr["First_Name"] == DBNull.Value ? string.Empty : Convert.ToString(dr["First_Name"]);
+                            doctorModel.Last_Name = dr["Last_name"] == DBNull.Value ? string.Empty : Convert.ToString(dr["Last_Name"]);
+                            doctorModel.Age = dr["Age"] == DBNull.Value ? 0 : Convert.ToInt32(dr["Age"]);
+                            doctorModel.Gender = dr["Gender"] == DBNull.Value ? string.Empty : Convert.ToString(dr["Gender"]);
+                            doctorModel.Department = dr["Department_Name"] == DBNull.Value ? string.Empty : Convert.ToString(dr["Department_Name"]);
+                            doctorModel.Experience = dr["Experience"] == DBNull.Value ? 0 : Convert.ToInt32(dr["Experience"]);
+                            doctorModel.Consultation_Charge = dr["Consultation_Charge"] == DBNull.Value ? 0 : Convert.ToInt32(dr["Consultation_Charge"]);
+                            doctorModel.Contact_No = dr["Contact_No"] == DBNull.Value ? string.Empty : Convert.ToString(dr["Contact_No"]);
+                            doctorModel.Timings_From = dr["Timings_From"] == DBNull.Value ? string.Empty : Convert.ToString(dr["Timings_From"]);
+                            doctorModel.Timings_To = dr["Timings_To"] == DBNull.Value ? string.Empty : Convert.ToString(dr["Timings_To"]);
+                            doctorModel.Email = dr["Email"] == DBNull.Value ? string.Empty : Convert.ToString(dr["Email"]);
+                            doctorModel.Password = dr["Password"] == DBNull.Value ? string.Empty : Convert.ToString(dr["Password"]);
+                            doctorModel.City = dr["City"] == DBNull.Value ? string.Empty : Convert.ToString(dr["City"]);
+                            doctorModel.State = dr["State_Name"] == DBNull.Value ? string.Empty : Convert.ToString(dr["State_Name"]);
+                            doctorModel.Pincode = dr["Pincode"] == DBNull.Value ? 0 : Convert.ToInt32(dr["Pincode"]);
+                            doctorModel.Address = dr["Address"] == DBNull.Value ? string.Empty : Convert.ToString(dr["Address"]);
+                            doctorDetailsList.Add(doctorModel);
+
+                        }
+                        dr.Close();
+                        return doctorDetailsList;
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+
+                    finally
+                    {
+                        if (cn.State == System.Data.ConnectionState.Open)
+                        {
+                            cn.Close();
+                        }
+                    }
+                }
+            }
+        }
+------------------------------------------------------------------------------------------
+
+java script is a client side as well as server side scripting language that will inserted into html pages
+ ans is understood by browser
+
+negative infinity is a number in java script which can be derived by dividing negative number by zero is called as negative infinity number
+
+------------------------------------------------------------------------------------------
+
+
+
+$ajax syntax
+can we use variable in java script
+types of selectors in jquery
+diff between == vs ===
+js case sensitive
+data types supported or not
+function and selector chaning
+how to dubug js and jq
+what is json
+exception handling in js
+var data type in js
+what is each function?
+what is chaning
+
+
+
+
+
+select * from (select rownumber over(order by eid desc) as rownumber,* from employee)as optional where rownumber > 3 and rownumber < 6
+
+which version control used ?
+
+team foundation server
+earlier projects i used github .
+
+
+which tool is using for finding the bugs( testing ) the application?
+jira tool.
+
+jira is a tool developed by australian company atlassian it is used for bug tracking ,issue tracking, and project management.
+
+
+-----------------------what is Json-------------------------------------
+
+JSON stands for JavaScript Object Notation
+
+JSON is a lightweight format for storing and transporting data
+
+JSON is often used when data is sent from a server to a web page
+
+JSON is "self-describing" and easy to understand
+
+------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
