@@ -1,0 +1,153 @@
+@model WebAPICrudOperation.Models.PateintModel
+
+@{
+    ViewBag.Title = "CRUDOperation";
+}
+
+<h2 align="center" style="color:brown">CRUDOperation</h2>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            type: "Get",
+            url: "http://localhost:60219/api/values",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                $.each(result, function (i, value) {
+                    $("#patient").append("<tr><td>" + value.FirstName + "</td><td>" + value.LastName + "</td><td>" + value.Age + "</td><td>" + value.BloodGroup + "</td></tr>");
+                });
+            },
+            error: function () {
+                alert('Error');
+            }
+        });
+    });
+
+
+    $(function () {
+        $("#btnGetPatientDetails").click(function () {
+
+            //  alert("As you can see, the link no longer took you to jquery.com");
+            var PatientId = $("#Id").val();
+            alert(PatientId);
+            $.ajax({
+                type: "Get",
+                url: "http://localhost:60219/api/values/" + PatientId,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    alert(result[0].FirstName);
+                    debugger;
+                    $.each(result, function (i, value) {
+                        $("#patient").append("<tr><td>" + value.FirstName + "</td><td>" + value.LastName + "</td><td>" + value.Age + "</td><td>" + value.BloodGroup + "</td></tr>");
+                    });
+                },
+                error: function () {
+                    alert('Error');
+                }
+            });
+
+        });
+    });
+
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Id, "Pateint Id", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.FirstName, "First Name", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.LastName, "Last Name", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Age, "Age", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BloodGroup, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.BloodGroup, "Blood Group", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.BloodGroup, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <br />
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-offset-2 col-md-3">
+                        <input type="submit" value="Create" id="btnCreate" class="btn btn-success" />
+                    </div>
+                    <div class="col-md-3">
+                        <input type="submit" value="Update" id="btnUpdate" class="btn btn-warning" />
+                    </div>
+                    <div class="col-md-3">
+                        <input type="submit" value="Delete" id="btnDelete" class="btn btn-danger" />
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-offset-4 col-md-8">
+                    <input type="submit" name="name" value="GetPatientDetails" id="btnGetPatientDetails" class="btn btn-dark" />
+                </div>
+            </div>
+            <br />
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+</div>
+}
+<div id="div1">
+    <table id="patienttable" class="table table-bordered" align="center">
+        <thead class="bg-primary">
+            <tr style="text-align:center">
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>Blood Group</th>
+            </tr>
+        </thead>
+        <tbody id="patient"></tbody>
+    </table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,99 @@
+-------------------------------------MVC Questions----------------------------------------
+1.Features of MVC
+2.What are filters in MVC and usage of each
+3.how to create custom filters?
+
+class MyErrorHandler : HandleErrorAttribute
+{
+    public override void OnException(ExceptionContext filterContext)
+    {
+        Log(filterContext.Exception);
+
+        base.OnException(filterContext);
+    }
+
+    private void Log(Exception exception)
+    {
+        //log exception here..
+ 
+    }
+}
+
+4.client side and server side validation in MVC(Basically about Data annotation)
+5.client side validation required in MVC or Data annotation will take care of client side validation
+6.how to create our own custom validation
+
+namespace MvcCustomValidationAttribute_Demo.CustomValidation  
+{  
+    public class CustomHireDate:ValidationAttribute  
+    {  
+        public override bool IsValid(object value)  
+        {  
+            DateTime dateTime = Convert.ToDateTime(value);  
+            return dateTime <= DateTime.Now;  
+        }  
+    }  
+} 
+
+7.ways of passing data from one controller to another
+8.Diff b/w Html.Partial vs Html.RenderPartial
+9.what is routing, how to create custom route
+
+public static void RegisterRoutes(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapRoute(
+                "Blog",                                           // Route name
+                "Archive/{entryDate}",                            // URL with parameters
+                new { controller = "Archive", action = "Entry" }  // Parameter defaults
+            );
+            routes.MapRoute(
+                "Default",                                              // Route name
+                "{controller}/{action}/{id}",                           // URL with parameters
+                new { controller = "Home", action = "Index", id = "" }  // Parameter defaults
+            );
+        }
+
+10.how to pass data using route object
+11.Is Viewstate available in MVC ? If Yes then why ? If No then why ?
+12.autherization and authentication in MVC?
+13.While returning a partial view, model passing required ?
+14.what is Layout View?=
+15.what is @RenderBody ? Can we have two @RenderBody in the same view ?
+@RenderBody is used for injecting content from child page into the master page design. If there is no named section in child page, the content will get displayed in RenderBody section.
+16.Exception handling in MVC
+
+public class HomeController : Controller
+{
+    [HandleError]
+    [HandleError(ExceptionType =typeof(NullReferenceException), View ="~/Views/Error/NullReference.cshtml")]
+    public ActionResult Contact()
+    {
+        string msg = null;
+        ViewBag.Message = msg.Length;
+            
+        return View();
+    }
+}
+
+17.What is _ViewStart.cshtml in MVC project
+-------------------------------------------------------------------------------------------
+We need to install this packages
+JWT token
+Microsoft asp.net.webapi.client
+cors
+
+
+----------------------------------Web API Questions----------------------------------------
+
+1.What are the features of Web API ?
+2.How Web API differs from .asmx and wcf services
+3.what kind of client applications can use web api
+4.how to perform authorization and authentication in web api
+5.how Web API differs from MVC
+6.How to handle global level exceptions in Web API
+7.Web API can return code level errors to Response object ? -> Ans. NO, If is there any error then it will only return Http Status code
+8.What are the Http verbs and usage of each
+9.What the ways to use/consume Web API  -> Ans.(from C# using HttpClient class object,from jQuery using Ajax)
+10.If the client wants response in only JSON format then how to send a request to the web api ?
+11.If two action methods have the same name with [PUT] attribute and if client is requesting that method as PUT then what will happen ?

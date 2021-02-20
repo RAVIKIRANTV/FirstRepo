@@ -1,0 +1,56 @@
+-------------------------------------MVC Questions----------------------------------------
+
+1.Features of MVC
+2.What are filters in MVC and usage of each
+3.how to create custom filters?
+4.client side and server side validation in MVC(Basically about Data annotation)
+5.client side validation required in MVC or Data annotation will take care of client side validation
+6.how to create our own custom validation
+7.ways of passing data from one controller to another
+8.Diff b/w Html.Partial vs Html.RenderPartial
+9.what is routing, how to create custom route
+10.how to pass data using route object
+11.Is Viewstate available in MVC ? If Yes then why ? If No then why ?
+12.autherization and authentication in MVC?
+13.While returning a partial view, model passing required ?
+14.what is Layout View?=
+15.what is @RenderBody ? Can we have two @RenderBody in the same view ?
+16.Exception handling in MVC?
+17.What is _ViewStart.cshtml in MVC project?
+
+----------------------------------Web API Questions----------------------------------------
+
+1.What are the features of Web API ?
+Ans:Attribute Routing,Cross Origin Resource Sharing (CORS),Open Web Interface for .NET (OWIN) self-hosting,HttpActionResult,Web API OData.
+
+2.How Web API differs from .asmx and wcf services ?
+Ans:Web Services is SOAP based and returns XML data and WCF is also same but Web API returns JSON data. 
+Web Services supports only HTTP protocol whereas WCF supports multiple (TCP, named pipe, p2p,etc..) and Web API can be used from any where.
+
+3.what kind of client applications can use web api
+Ans:WebAPI can be consumed by any client which supports HTTP verbs such as GET, PUT, DELETE, POST.
+
+4.how to perform authorization and authentication in web api
+Ans:by token authentication,Api key,Oauth .
+
+5.how Web API differs from MVC ?
+Asp.Net MVC is used to create web applications that return both views and data but Asp.Net Web API is used to create full-blown HTTP 
+services with an easy and simple way that returns only data .
+
+6.How to handle global level exceptions in Web API ?
+Ans:Decorate Action with exception filter,Decorate Controller with exception filter,Filter Register globally .
+
+7.Web API can return code level errors to Response object ?
+Ans. NO, If is there any error then it will only return Http Status code
+
+8.What are the Http verbs and usage of each ?
+Ans: Get:Read,post:create,put:update,patch:modify,delete:delete.
+
+9.What the ways to use/consume Web API  
+Ans.(from C# using HttpClient class object,from jQuery using Ajax)
+
+10.If the client wants response in only JSON format then how to send a request to the web api ?
+request with content_Type:application/json.
+
+11.If two action methods have the same name with [PUT] attribute and if client is requesting that method as PUT then what will happen ?
+first put method will be exicuted.
